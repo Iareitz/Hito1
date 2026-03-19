@@ -55,3 +55,10 @@ def leer_recursos(path: str) -> List[Recurso]:
             ))
     return recursos
 
+def escribir_output(asignaciones: List[Asignacion], path: str) -> None:
+    """Escribe el cronograma en output.txt en formato CSV."""
+    with open(path, "w", newline="") as f:
+        writer = csv.writer(f)
+        for a in asignaciones:
+            writer.writerow([a.tarea_id, a.recurso_id, a.inicio, a.fin])
+
