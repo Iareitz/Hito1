@@ -43,3 +43,15 @@ def leer_tareas(path: str) -> List[Tarea]:
             ))
     return tareas
 
+def leer_recursos(path: str) -> List[Recurso]:
+    """Lee recursos.txt y devuelve una lista de objetos Recurso."""
+    recursos: List[Recurso] = []
+    with open(path) as f:
+        reader = csv.reader(f)
+        for fila in reader:
+            recursos.append(Recurso(
+                id=fila[0].strip(),
+                categorias=set(c.strip() for c in fila[1:])
+            ))
+    return recursos
+
