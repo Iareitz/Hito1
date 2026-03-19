@@ -26,8 +26,8 @@ class Recurso:
 @dataclass
 class Asignacion:
     """Representa una línea del output: qué tarea, en qué recurso, cuándo."""
-    tarea_id: str
-    recurso_id: str
-    inicio: int
-    fin: int
+    id_tarea: str
+    id_recurso: str
+    tiempo_inicio: int
+    tiempo_fin: int
 
