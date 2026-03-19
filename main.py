@@ -30,6 +30,7 @@ class Asignacion:
     id_recurso: str
     tiempo_inicio: int
     tiempo_fin: int
+
 def leer_tareas(path: str) -> List[Tarea]:
     """Lee tareas.txt y devuelve una lista de objetos Tarea."""
     tareas: List[Tarea] = []
@@ -60,5 +61,5 @@ def escribir_output(asignaciones: List[Asignacion], path: str) -> None:
     with open(path, "w", newline="") as f:
         writer = csv.writer(f)
         for a in asignaciones:
-            writer.writerow([a.tarea_id, a.recurso_id, a.inicio, a.fin])
+            writer.writerow([a.id_tarea, a.id_recurso, a.tiempo_inicio, a.tiempo_fin])
 
