@@ -30,4 +30,16 @@ class Asignacion:
     id_recurso: str
     tiempo_inicio: int
     tiempo_fin: int
+def leer_tareas(path: str) -> List[Tarea]:
+    """Lee tareas.txt y devuelve una lista de objetos Tarea."""
+    tareas: List[Tarea] = []
+    with open(path) as f:
+        reader = csv.reader(f)
+        for fila in reader:
+            tareas.append(Tarea(
+                id=fila[0].strip(),
+                duracion=int(fila[1].strip()),
+                categoria=fila[2].strip()
+            ))
+    return tareas
 
