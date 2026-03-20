@@ -63,3 +63,17 @@ def escribir_output(asignaciones: List[Asignacion], path: str) -> None:
         for a in asignaciones:
             writer.writerow([a.id_tarea, a.id_recurso, a.tiempo_inicio, a.tiempo_fin])
 
+
+def planificar(tareas: List[Tarea], recursos: List[Recurso]) -> List[Asignacion]:
+    tareas_ord = sorted(tareas, key=lambda t: t.duracion, reverse=True)
+    asignaciones: List[Asignacion] = []
+    for t in tareas_ord:
+        compatibles = [r for r in recursos if t.categoria in r.categorias]
+        if not compatibles:
+            continue
+        mejor = min(compatibles, key=lambda r: r.tiempo_libre)
+        inicio = mejor.tiempo_libre
+        fin = inicio + t.duracion
+        asignaciones.append(Asignacion(id_tarea=t.id, id_recurso=mejor.id, tiempo_inicio=inicio, tiempo_fin=fin))
+        mejor.tiempo_libre = fin
+    return asignaciones
