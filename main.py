@@ -77,3 +77,34 @@ def planificar(tareas: List[Tarea], recursos: List[Recurso]) -> List[Asignacion]
         asignaciones.append(Asignacion(id_tarea=t.id, id_recurso=mejor.id, tiempo_inicio=inicio, tiempo_fin=fin))
         mejor.tiempo_libre = fin
     return asignaciones
+
+
+def main() -> None:
+    if len(sys.argv) != 2:
+        print("Uso: python main.py <makespan_objetivo>")
+        sys.exit(1)
+
+    makespan_objetivo = int(sys.argv[1])
+
+    tareas = leer_tareas("tareas.txt")
+    recursos = leer_recursos("recursos.txt")
+
+    inicio = time.time()
+    asignaciones = planificar(tareas, recursos)
+    tiempo_ejecucion = time.time() - inicio
+
+    makespan = max(a.tiempo_fin for a in asignaciones)
+
+    escribir_output(asignaciones, "output.txt")
+
+    print(f"Makespan obtenido: {makespan}")
+    print(f"Makespan objetivo: {makespan_objetivo}")
+    if makespan <= makespan_objetivo:
+        print("Solucion dentro del objetivo")
+    else:
+        print("Solucion fuera del objetivo")
+    print(f"Tiempo de ejecucion: {tiempo_ejecucion:.4f} s")
+
+
+if __name__ == "__main__":
+    main()
