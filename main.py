@@ -83,6 +83,8 @@ def planificar(tareas: List[Tarea], recursos: List[Recurso]) -> List[Asignacion]
         mejor.tiempo_libre = fin
     return asignaciones
 
+<<<<<<< HEAD
+=======
 
 def main() -> None:
     if len(sys.argv) != 2:
@@ -113,3 +115,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+>>>>>>> 68b48f3b4f1c7e192e22552c6f17799ca1659203
