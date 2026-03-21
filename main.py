@@ -25,18 +25,20 @@ class Recurso:
 
 @dataclass
 class Asignacion:
-    """Representa una línea del output: qué tarea, en qué recurso, cuándo."""
+    #Representa una línea del output: qué tarea, en qué recurso, cuándo."
     id_tarea: str
     id_recurso: str
     tiempo_inicio: int
     tiempo_fin: int
 
 def leer_tareas(path: str) -> List[Tarea]:
-    """Lee tareas.txt y devuelve una lista de objetos Tarea."""
+    #Lee tareas.txt y devuelve una lista de objetos Tarea.
     tareas: List[Tarea] = []
     with open(path) as f:
         reader = csv.reader(f)
         for fila in reader:
+            if not fila:
+                continue
             tareas.append(Tarea(
                 id=fila[0].strip(),
                 duracion=int(fila[1].strip()),
@@ -45,19 +47,22 @@ def leer_tareas(path: str) -> List[Tarea]:
     return tareas
 
 def leer_recursos(path: str) -> List[Recurso]:
-    """Lee recursos.txt y devuelve una lista de objetos Recurso."""
+    #Lee recursos.txt y devuelve una lista de objetos Recurso.
     recursos: List[Recurso] = []
     with open(path) as f:
         reader = csv.reader(f)
         for fila in reader:
+            if not fila:
+                continue
             recursos.append(Recurso(
+
                 id=fila[0].strip(),
                 categorias=set(c.strip() for c in fila[1:])
             ))
     return recursos
 
 def escribir_output(asignaciones: List[Asignacion], path: str) -> None:
-    """Escribe el cronograma en output.txt en formato CSV."""
+    #Escribe el cronograma en output.txt en formato CSV.
     with open(path, "w", newline="") as f:
         writer = csv.writer(f)
         for a in asignaciones:
