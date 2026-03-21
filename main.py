@@ -77,3 +77,4 @@ def planificar(tareas: List[Tarea], recursos: List[Recurso]) -> List[Asignacion]
         asignaciones.append(Asignacion(id_tarea=t.id, id_recurso=mejor.id, tiempo_inicio=inicio, tiempo_fin=fin))
         mejor.tiempo_libre = fin
     return asignaciones
+
